@@ -7,9 +7,15 @@
 //
 
 #include <iostream>
+#include "VectorRace.h"
+
 
 int main(int argc, const char * argv[]) {
-    // insert code here...
-    std::cout << "Hello, World!\n";
+    
+    VectorRace vRace;
+    
+    //Control all the game conditions from inside (main menu)
+    vRace.NewGame();
+    
     return 0;
 }
