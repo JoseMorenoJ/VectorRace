@@ -10,6 +10,9 @@
 #define __Vector_Race__Player__
 
 #include <stdio.h>
+
+#include <SDL2/SDL.h>
+
 #include "Vector.h"
 
 class Player
@@ -21,12 +24,12 @@ public:
     
     //Setters
     void SetVector(Vector);
-    void SetLastCoordinate(Coordinate);
+    void SetLastVector(Vector);
     void SetActive(bool);
     
     //Getters
-    Vector GetVector() const;
-    Coordinate GetLastCoordinate() const;
+    Vector* GetVector();
+    Vector* GetLastVector();
     bool IsActive() const;
     
     //Movement
@@ -40,10 +43,10 @@ public:
     
 private:
     Vector _vector; //The vector representation.
-    Coordinate _lastCoordinate; //Keep track of the previous position.
-    int _speedX;
-    int _speedY;
+    Vector _lastVector; //last movement.
     bool _bActive; //Determine if it is its turn or not.
+    
+    SDL_Scancode _pressedKey; //to keep track of the pressed key before the Enter
     
 };
 

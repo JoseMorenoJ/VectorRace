@@ -24,6 +24,7 @@
 #include <string>
 
 #include "Player.h"
+#include "Vector.h"
 
 //Class Graphics: SDL tools to render, load images and draw them in the screen.
 class Graphics
@@ -38,9 +39,17 @@ public:
                      , SDL_Rect* sourceRectangle
                      , SDL_Rect* destinationRectangle);
     
+    //void LoadMap
+    //Loads the map file in png format
+    void LoadMap(std::string&);
+    
+    //void SetColor
+    //  Changes the color of the render
+    void SetRenderColor(SDL_Color);
+    
     //void DrawVector
-    //Draws the vector representation of the player
-    void DrawVector(Player);
+    //  Draws the vector representation of the player
+    void DrawVector(Vector*);
     
     //void flip
     //  Renders everything to the screen.
@@ -57,6 +66,8 @@ public:
 private:
     SDL_Window* _window; //window object
     SDL_Renderer* _renderer; //drawing in the window
+    
+    SDL_Texture* _loadedMap;
     
     //This was in Cave Story
     std::map<std::string, SDL_Surface*> _spriteSheets; //this will keep the loaded images so it doesn't reload them every time.

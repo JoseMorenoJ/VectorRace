@@ -12,14 +12,11 @@
 
 void Map::InitGrid()
 {
-    const int ROWS = sizeof(_grid)/sizeof(_grid[0]);
-    const int COLS = sizeof(_grid[0])/sizeof(int);
-    
-    std::cout << "sizeof rows" << ROWS <<std::endl;
-    std::cout << "sizeof cols" << COLS <<std::endl;
-    
-    for (int row=0; row<ROWS; ++row) {
-        for (int col=0; col<COLS; ++col) {
+    const int ROWS = sizeof(_grid)/sizeof(_grid[0]); // whole grid / first row
+    const int COLS = sizeof(_grid[0])/sizeof(int);   // first row / element
+        
+    for (int row = 0; row < ROWS; ++row) {
+        for (int col = 0; col < COLS; ++col) {
             _grid[col][row] = 0;
         }
     }

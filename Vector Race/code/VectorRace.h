@@ -19,19 +19,24 @@
 class VectorRace
 {
 public:
+    VectorRace();
+    ~VectorRace();
     
     void NewGame();
     void PrepareRace(Player*, Player*);
         
     bool isGameOver();
     
-    void processKey(SDL_Scancode, Player);
+    void processKey(SDL_Scancode, Player*);
     
 private:
     bool _bGameOver;
     
     //Helper Functions:
     Player GetActivePlayer();
+    void SetPlayersColors(Player* p1, Player* p2);
+    
+    SDL_Color _clearColor;
     
 };
 

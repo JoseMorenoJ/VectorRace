@@ -11,11 +11,12 @@
 #define __Vector_Race__Vector__
 
 #include <stdio.h>
+#include <SDL2/SDL.h>
 
 
 //Only valid coordinates are multiples of 5.
 struct Coordinate {
-    Coordinate(int x = 0, int y = 0): x(x), y(y){};
+    Coordinate(int x = 0, int y = 0): x(x), y(y) {};
     int x;
     int y;
 };
@@ -26,14 +27,32 @@ public:
     //Setters
     void SetSpeed(Coordinate);
     void SetTail(Coordinate);
+    void SetColor(SDL_Color);
+    void SetColor(Uint8 r, Uint8 g, Uint8 b, Uint8 a);
     
     //Getters
     Coordinate GetSpeed() const;
     Coordinate GetTail() const;
+    SDL_Color GetColor() const;
+    Uint8 GetColorR() const;
+    Uint8 GetColorG() const;
+    Uint8 GetColorB() const;
+    Uint8 GetColorA() const;
     
 private:
     Coordinate _speed; //speed of the vector, its module
     Coordinate _tail; //position of the tail, origin point of the vector
+    SDL_Color _color; //color in which the vector will be drawn
 };
+
+
+//Overload the Coordinate + operators
+inline Coordinate operator+(Coordinate lhs, const Coordinate& rhs)
+{
+    lhs.x += rhs.x;
+    lhs.y += rhs.y;
+    return lhs;
+}
+
 
 #endif /* defined(__Vector_Race__Vector__) */

@@ -9,8 +9,10 @@
 
 #include "graphics.h"
 
-const int SCREEN_WIDTH = 400;
-const int SCREEN_HEIGHT = 400;
+const int SCREEN_WIDTH = 640;
+const int SCREEN_HEIGHT = 480;
+
+SDL_Rect MakeSDLRect(int X, int Y, int W, int H);
 
 //Graphics class:
 //  Holds all the information related with the graphics in the game.
@@ -24,6 +26,7 @@ Graphics::Graphics()
                                 , &this->_renderer);
     
     SDL_SetWindowTitle(this->_window, "Vector Race");
+    Clear();
     
 }
 
@@ -37,8 +40,35 @@ void Graphics::DrawSurface(SDL_Texture* texture, SDL_Rect* sourceRectangle, SDL_
     SDL_RenderCopy(this->_renderer, texture, sourceRectangle, destinationRectangle);
 }
 
-void Graphics::DrawVector(Player player)
+void Graphics::LoadMap(std::string &filePath)
 {
+    _loadedMap = SDL_CreateTextureFromSurface( _renderer, IMG_Load("resources/TestMap.png") );
+    
+    SDL_Rect destRect = MakeSDLRect(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
+    
+    SDL_SetRenderDrawColor(_renderer, 255, 255, 255, SDL_ALPHA_OPAQUE);
+    SDL_RenderFillRect(_renderer, &destRect);
+    
+    return;
+}
+
+void Graphics::SetRenderColor(SDL_Color newColor)
+{
+    SDL_SetRenderDrawColor(_renderer
+                           , newColor.r
+                           , newColor.g
+                           , newColor.b
+                           , newColor.a);
+
+}
+
+void Graphics::DrawVector(Vector* vector)
+{
+    SDL_RenderDrawLine(_renderer
+                       , vector->GetTail().x
+                       , vector->GetTail().y
+                       , vector->GetTail().x + vector->GetSpeed().x
+                       , vector->GetTail().y + vector->GetSpeed().y);
     return;
 }
 
@@ -55,4 +85,14 @@ void Graphics::Clear()
 SDL_Renderer* Graphics::GetRenderer() const
 {
     return this->_renderer;
+}
+
+SDL_Rect MakeSDLRect(int X, int Y, int W, int H)
+{
+    SDL_Rect rect;
+    rect.x = X;
+    rect.y = Y;
+    rect.w = W;
+    rect.h = H;
+    return rect;
 }

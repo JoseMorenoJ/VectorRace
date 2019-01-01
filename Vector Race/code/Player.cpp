@@ -11,55 +11,77 @@
 #include "Player.h"
 
 //Constructor
-Player::Player() { return; }
+Player::Player()
+{
+    _vector.SetTail( Coordinate(100,100) );
+    _vector.SetSpeed( Coordinate(0,0) );
+    _pressedKey = SDL_SCANCODE_0;
+    
+    std::cout << "Player()" << std::endl;
+    
+    return;
+}
 
 //Destructor
-Player::~Player() { return; }
+Player::~Player()
+{
+    std::cout << "~Player()" << std::endl;
+
+    return;
+}
 
 //Setters
 void Player::SetVector(Vector newVector) { _vector = newVector; }
-void Player::SetLastCoordinate(Coordinate newCoord) { _lastCoordinate = newCoord; }
-void Player::SetActive(bool newActive) { _bActive = newActive;}
+void Player::SetLastVector(Vector newVector) { _lastVector = newVector; }
+void Player::SetActive(bool newActive) { _bActive = newActive; }
 
 //Getters
-Vector Player::GetVector() const { return _vector; }
-Coordinate Player::GetLastCoordinate() const { return _lastCoordinate; }
+Vector* Player::GetVector() { return &_vector; }
+Vector* Player::GetLastVector() { return &_lastVector; }
 bool Player::IsActive() const { return _bActive; }
 
 //Movement
 void Player::Up()
 {
-    //Draws the vector head y - 1
-    std::cout<<"x: " << _vector.GetHead().x << " y: " << _vector.GetHead().y - 1 << std::endl;
+    _vector = _lastVector;
+    _vector.SetSpeed(_vector.GetSpeed() + Coordinate(0, -10) );
+    
     return;
 }
 void Player::Down()
 {
-    //Draws the vector head y + 1
-    std::cout<<"x: " << _vector.GetHead().x << " y: " << _vector.GetHead().y + 1 << std::endl;
+    _vector = _lastVector;
+    _vector.SetSpeed(_vector.GetSpeed() + Coordinate(0, 10) );
+    
     return;
 }
 
 void Player::Left()
 {
-    //Draws the vector head x - 1
-    std::cout<<"x: " << _vector.GetHead().x - 1 << " y: " << _vector.GetHead().y << std::endl;
+    _vector = _lastVector;
+    _vector.SetSpeed(_vector.GetSpeed() + Coordinate(-10, 0) );
+
     return;
 }
 void Player::Right()
 {
-    //Draws the vector head x + 1
-    std::cout<<"x: " << _vector.GetHead().x + 1 << " y: " << _vector.GetHead().y << std::endl;
+    _vector = _lastVector;
+    _vector.SetSpeed(_vector.GetSpeed() + Coordinate(10, 0) );
+    
     return;
 }
 
 //Hit Enter:
 void Player::Enter()
 {
-    std::cout<<"Enter\n";
-    //Sets the new head and the new speed
-    Coordinate new_position(1,1);
-    _vector.SetHead(new_position);
-    std::cout << "new position" << new_position.x << ", " << new_position.y << std::endl;
+    
+    _vector.SetTail(_vector.GetTail() + _vector.GetSpeed());
+    
+    _lastVector = _vector;
+    
+    std::cout << "Speed:" << _vector.GetSpeed().x << ", " << _vector.GetSpeed().y << std::endl;
+    std::cout << "Position:" << _vector.GetTail().x << ", "
+              << _vector.GetTail().y << std::endl;
+    
     return;
 }
