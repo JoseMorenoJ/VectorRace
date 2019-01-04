@@ -15,6 +15,7 @@
 #include <SDL2/SDL.h>
 
 #include "Player.h"
+#include "graphics.h"
 
 class VectorRace
 {
@@ -24,19 +25,19 @@ public:
     
     void NewGame();
     void PrepareRace(Player*, Player*);
-        
+    //void DrawScreen(Graphics* graphics, Player* players[]);
+    
     bool isGameOver();
     
     void processKey(SDL_Scancode, Player*);
     
 private:
-    bool _bGameOver;
+    bool _bGameOver; //Control of the game loop
     
     //Helper Functions:
-    Player GetActivePlayer();
-    void SetPlayersColors(Player* p1, Player* p2);
-    
-    SDL_Color _clearColor;
+    Player* GetActivePlayer(Player* players[]);
+    void SetPlayersColors(Player* players[]);
+    Player* GetNextPlayer(Player* players[]);
     
 };
 

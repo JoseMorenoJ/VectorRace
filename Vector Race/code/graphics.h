@@ -20,6 +20,7 @@
 #include <SDL2/SDL.h>
 #include <SDL2_image/SDL_image.h>
 
+#include <iostream>
 #include <map>
 #include <string>
 
@@ -50,10 +51,13 @@ public:
     //void DrawVector
     //  Draws the vector representation of the player
     void DrawVector(Vector*);
+    //void DrawLine
+    //  Draw a line between two coordinates
+    void DrawLine(Coordinate*, Coordinate*);
     
     //void flip
     //  Renders everything to the screen.
-    void Render();
+    void Flip();
     
     //void clear
     //  Clears the screen.
@@ -66,12 +70,15 @@ public:
 private:
     SDL_Window* _window; //window object
     SDL_Renderer* _renderer; //drawing in the window
+    SDL_Color _clearColor; //used to clear the render
     
-    SDL_Texture* _loadedMap;
+    SDL_Texture* _loadedMap; //
     
     //This was in Cave Story
     std::map<std::string, SDL_Surface*> _spriteSheets; //this will keep the loaded images so it doesn't reload them every time.
     
+    
 };
 
-#endif
+#endif //Story_Cave_Remake_graphics_h
+

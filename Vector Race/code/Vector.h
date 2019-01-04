@@ -10,13 +10,15 @@
 #ifndef __Vector_Race__Vector__
 #define __Vector_Race__Vector__
 
-#include <stdio.h>
+#include <iostream>
+
 #include <SDL2/SDL.h>
 
 
 //Only valid coordinates are multiples of 5.
 struct Coordinate {
     Coordinate(int x = 0, int y = 0): x(x), y(y) {};
+    Coordinate(Coordinate const &c): x(c.x), y(c.y) { x = c.x; y = c.y; };
     int x;
     int y;
 };
@@ -24,25 +26,20 @@ struct Coordinate {
 class Vector
 {
 public:
+    Vector();
+    ~Vector();
+    
     //Setters
     void SetSpeed(Coordinate);
     void SetTail(Coordinate);
-    void SetColor(SDL_Color);
-    void SetColor(Uint8 r, Uint8 g, Uint8 b, Uint8 a);
     
     //Getters
     Coordinate GetSpeed() const;
     Coordinate GetTail() const;
-    SDL_Color GetColor() const;
-    Uint8 GetColorR() const;
-    Uint8 GetColorG() const;
-    Uint8 GetColorB() const;
-    Uint8 GetColorA() const;
     
 private:
     Coordinate _speed; //speed of the vector, its module
     Coordinate _tail; //position of the tail, origin point of the vector
-    SDL_Color _color; //color in which the vector will be drawn
 };
 
 
@@ -52,6 +49,18 @@ inline Coordinate operator+(Coordinate lhs, const Coordinate& rhs)
     lhs.x += rhs.x;
     lhs.y += rhs.y;
     return lhs;
+}
+
+inline std::ostream& operator<< (std::ostream& stream, const Coordinate& coord)
+{
+    stream << "(" << coord.x << ", " << coord.y << ")";
+    return stream;
+}
+
+inline std::ostream& operator<< (std::ostream& stream, const SDL_Color& color)
+{
+    stream << "(" << (int)color.r << ", " << (int)color.g << ", " << (int)color.b << ")";
+    return stream;
 }
 
 

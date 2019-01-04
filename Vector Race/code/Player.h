@@ -10,6 +10,7 @@
 #define __Vector_Race__Player__
 
 #include <stdio.h>
+#include <list>
 
 #include <SDL2/SDL.h>
 
@@ -25,12 +26,21 @@ public:
     //Setters
     void SetVector(Vector);
     void SetLastVector(Vector);
+    void SetColor(SDL_Color);
+    void SetColor(Uint8 r, Uint8 g, Uint8 b, Uint8 a);
     void SetActive(bool);
     
     //Getters
     Vector* GetVector();
     Vector* GetLastVector();
+    SDL_Color GetColor() const;
+    Uint8 GetColorR() const;
+    Uint8 GetColorG() const;
+    Uint8 GetColorB() const;
+    Uint8 GetColorA() const;
     bool IsActive() const;
+    Coordinate GetTrace();
+    std::list<Coordinate> * GetTraceList();
     
     //Movement
     void Up();
@@ -42,12 +52,14 @@ public:
     void Enter();
     
 private:
-    Vector _vector; //The vector representation.
+    Vector _vector; //the vector representation.
     Vector _lastVector; //last movement.
-    bool _bActive; //Determine if it is its turn or not.
+    SDL_Color _color; //color in which the player will be drawn
+    bool _bActive; //determine if it is its turn or not.
+    std::list<Coordinate> _trace; //list of the coordinates
     
-    SDL_Scancode _pressedKey; //to keep track of the pressed key before the Enter
-    
+    //Helper Methods
+    void AddToTrace(Coordinate);
 };
 
 #endif /* defined(__Vector_Race__Player__) */

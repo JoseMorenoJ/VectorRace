@@ -26,6 +26,12 @@ Graphics::Graphics()
                                 , &this->_renderer);
     
     SDL_SetWindowTitle(this->_window, "Vector Race");
+    
+    _clearColor.r = 0;
+    _clearColor.g = 0;
+    _clearColor.b = 0;
+    _clearColor.a = 255; //SDL_ALPHA_OPAQUE
+    
     Clear();
     
 }
@@ -46,7 +52,7 @@ void Graphics::LoadMap(std::string &filePath)
     
     SDL_Rect destRect = MakeSDLRect(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
     
-    SDL_SetRenderDrawColor(_renderer, 255, 255, 255, SDL_ALPHA_OPAQUE);
+    SDL_SetRenderDrawColor(_renderer, 255, 255, 255, 255); //SDL_ALPHA_OPAQUE
     SDL_RenderFillRect(_renderer, &destRect);
     
     return;
@@ -59,7 +65,7 @@ void Graphics::SetRenderColor(SDL_Color newColor)
                            , newColor.g
                            , newColor.b
                            , newColor.a);
-
+    std::cout << newColor << std::endl;
 }
 
 void Graphics::DrawVector(Vector* vector)
@@ -72,20 +78,29 @@ void Graphics::DrawVector(Vector* vector)
     return;
 }
 
-void Graphics::Render()
+void Graphics::DrawLine(Coordinate* start, Coordinate* end)
+{
+    SDL_RenderDrawLine(_renderer
+                       , start->x
+                       , start->y
+                       , end->x
+                       , end->y);
+    return;
+}
+
+
+void Graphics::Flip()
 {
     SDL_RenderPresent(this->_renderer);
 }
 
 void Graphics::Clear()
 {
+    SetRenderColor(_clearColor);
     SDL_RenderClear(this->_renderer);
 }
 
-SDL_Renderer* Graphics::GetRenderer() const
-{
-    return this->_renderer;
-}
+SDL_Renderer* Graphics::GetRenderer() const { return this->_renderer; }
 
 SDL_Rect MakeSDLRect(int X, int Y, int W, int H)
 {
