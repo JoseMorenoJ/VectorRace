@@ -9,28 +9,22 @@
 #include <iostream>
 
 #include "Player.h"
+#include "Globals.h"
 
 //Constructor
 Player::Player()
 {
-    _vector.SetTail( Coordinate(100,100) );
-    _vector.SetSpeed( Coordinate(0,0) );
-    _lastVector = _vector;
-    SetColor(255, 255, 255, 255);
-    _trace.push_back(_vector.GetTail());
-    
     std::cout << "Player()" << std::endl;
     
-    return;
+    _vector.SetOrigin( Coordinate(140,140) );
+    _vector.SetSpeed( Coordinate(0,0) );
+    _lastVector = _vector;
+    SetColor(255, 255, 255, SDL_ALPHA_OPAQUE);
+    _trace.push_back(_vector.GetOrigin());
 }
 
 //Destructor
-Player::~Player()
-{
-    std::cout << "~Player()" << std::endl;
-
-    return;
-}
+Player::~Player() { std::cout << "~Player()" << std::endl; }
 
 //Setters
 void Player::SetVector(Vector newVector) { _vector = newVector; }
@@ -80,6 +74,7 @@ void Player::Left()
 
     return;
 }
+
 void Player::Right()
 {
     _vector = _lastVector;
@@ -91,23 +86,34 @@ void Player::Right()
 //Hit Enter:
 void Player::Enter()
 {
-    _vector.SetTail( _vector.GetTail() + _vector.GetSpeed() );
-    
+    //Update to the new position
+    _vector.SetOrigin( _vector.GetOrigin() + _vector.GetSpeed() );
     _lastVector = _vector;
     
-    //Add to the trace:
-    AddToTrace(_vector.GetTail());
+    AddToTrace(_vector.GetOrigin());
     
-    std::cout << "Speed:" << _vector.GetSpeed() << std::endl;
-    std::cout << "Position:" << _vector.GetTail() << std::endl;
+    std::cout << "Position:" << _vector.GetOrigin() << std::endl;
     
     return;
 }
 
-void Player::AddToTrace(Coordinate point)
+void Player::OnCrash()
 {
-    //Add the coordinate to the trace
-    _trace.push_back(point);
+    //Check that the vector is inside the screen limits
+    if (_vector.GetOrigin().x < 0)
+        _vector.SetOrigin( Coordinate(0, _vector.GetOrigin().y) );
     
-    return;
+    if (_vector.GetOrigin().y < 0)
+        _vector.SetOrigin( Coordinate(_vector.GetOrigin().x, 0) );
+    
+    if (_vector.GetOrigin().x > SCREEN_WIDTH)
+        _vector.SetOrigin( Coordinate(SCREEN_WIDTH, _vector.GetOrigin().y) );
+    
+    if (_vector.GetOrigin().x > SCREEN_HEIGHT)
+        _vector.SetOrigin( Coordinate(_vector.GetOrigin().x, SCREEN_HEIGHT) );
+    
+    //Set speed to 0.
+    _vector.SetSpeed(Coordinate(0,0));
 }
+
+inline void Player::AddToTrace(Coordinate point) { _trace.push_back(point); }

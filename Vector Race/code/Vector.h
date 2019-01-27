@@ -15,7 +15,7 @@
 #include <SDL2/SDL.h>
 
 
-//Only valid coordinates are multiples of 5.
+//Coordinates in pixels on the screen.
 struct Coordinate {
     Coordinate(int x = 0, int y = 0): x(x), y(y) {};
     Coordinate(Coordinate const &c): x(c.x), y(c.y) { x = c.x; y = c.y; };
@@ -31,15 +31,15 @@ public:
     
     //Setters
     void SetSpeed(Coordinate);
-    void SetTail(Coordinate);
+    void SetOrigin(Coordinate);
     
     //Getters
     Coordinate GetSpeed() const;
-    Coordinate GetTail() const;
+    Coordinate GetOrigin() const;
     
 private:
     Coordinate _speed; //speed of the vector, its module
-    Coordinate _tail; //position of the tail, origin point of the vector
+    Coordinate _origin; //position of the origin point of the vector
 };
 
 

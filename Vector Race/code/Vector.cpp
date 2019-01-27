@@ -14,8 +14,8 @@ Vector::~Vector() { std::cout << "~Vector()" << std::endl; }
 
 //Setters
 void Vector::SetSpeed(Coordinate newSpeed) { _speed = newSpeed; }
-void Vector::SetTail(Coordinate newTail)  { _tail = newTail; }
+void Vector::SetOrigin(Coordinate newTail)  { _origin = newTail; }
 
 //Getters
 Coordinate Vector::GetSpeed() const { return _speed; }
-Coordinate Vector::GetTail() const { return _tail; }
+Coordinate Vector::GetOrigin() const { return _origin; }

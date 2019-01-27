@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		F6CB234021D81DDD005789B5 /* Map.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F6CB233E21D81DDD005789B5 /* Map.cpp */; };
+		F68A70B021E0E62600100C0A /* Circuit.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F68A70AE21E0E62600100C0A /* Circuit.cpp */; };
 		F6FB595221D6774C00A3C59E /* VectorRace.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F6FB595021D6774C00A3C59E /* VectorRace.cpp */; };
 		F6FB595421D677D500A3C59E /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F6FB595321D677D500A3C59E /* main.cpp */; };
 		F6FB595721D6805700A3C59E /* SDL2_image.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F6FB595521D6805700A3C59E /* SDL2_image.framework */; };
@@ -31,15 +31,17 @@
 
 /* Begin PBXFileReference section */
 		F656E81321D5738C009A31E3 /* Vector Race */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "Vector Race"; sourceTree = BUILT_PRODUCTS_DIR; };
-		F6CB233E21D81DDD005789B5 /* Map.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Map.cpp; path = code/Map.cpp; sourceTree = "<group>"; };
-		F6CB233F21D81DDD005789B5 /* Map.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Map.h; path = code/Map.h; sourceTree = "<group>"; };
-		F6FB595021D6774C00A3C59E /* VectorRace.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = VectorRace.cpp; path = code/VectorRace.cpp; sourceTree = "<group>"; };
+		F68A70AE21E0E62600100C0A /* Circuit.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Circuit.cpp; path = code/Circuit.cpp; sourceTree = "<group>"; };
+		F68A70AF21E0E62600100C0A /* Circuit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Circuit.h; path = code/Circuit.h; sourceTree = "<group>"; };
+		F68A70B121E10A7D00100C0A /* Test_Circuit.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Test_Circuit.png; path = resources/Test_Circuit.png; sourceTree = "<group>"; };
+		F6C991FE21E0DC1400D2BBF7 /* Globals.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = Globals.h; path = code/Globals.h; sourceTree = "<group>"; };
+		F6FB595021D6774C00A3C59E /* VectorRace.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; lineEnding = 0; name = VectorRace.cpp; path = code/VectorRace.cpp; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.cpp; };
 		F6FB595121D6774C00A3C59E /* VectorRace.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VectorRace.h; path = code/VectorRace.h; sourceTree = "<group>"; };
 		F6FB595321D677D500A3C59E /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = main.cpp; path = code/main.cpp; sourceTree = "<group>"; };
 		F6FB595521D6805700A3C59E /* SDL2_image.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SDL2_image.framework; path = ../../../../Library/Frameworks/SDL2_image.framework; sourceTree = "<group>"; };
 		F6FB595621D6805700A3C59E /* SDL2.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SDL2.framework; path = ../../../../Library/Frameworks/SDL2.framework; sourceTree = "<group>"; };
-		F6FB595921D685F700A3C59E /* graphics.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = graphics.cpp; path = code/graphics.cpp; sourceTree = "<group>"; };
-		F6FB595A21D685F700A3C59E /* graphics.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = graphics.h; path = code/graphics.h; sourceTree = "<group>"; };
+		F6FB595921D685F700A3C59E /* graphics.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; lineEnding = 0; name = graphics.cpp; path = code/graphics.cpp; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.cpp; };
+		F6FB595A21D685F700A3C59E /* graphics.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; name = graphics.h; path = code/graphics.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		F6FB595C21D68C4500A3C59E /* Vector.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Vector.cpp; path = code/Vector.cpp; sourceTree = "<group>"; };
 		F6FB595D21D68C4500A3C59E /* Vector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Vector.h; path = code/Vector.h; sourceTree = "<group>"; };
 		F6FB595F21D68FD100A3C59E /* Player.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Player.cpp; path = code/Player.cpp; sourceTree = "<group>"; };
@@ -80,6 +82,10 @@
 		F656E81521D5738C009A31E3 /* Vector Race */ = {
 			isa = PBXGroup;
 			children = (
+				F6C991FD21E0CF8A00D2BBF7 /* resources */,
+				F6C991FE21E0DC1400D2BBF7 /* Globals.h */,
+				F68A70AE21E0E62600100C0A /* Circuit.cpp */,
+				F68A70AF21E0E62600100C0A /* Circuit.h */,
 				F6FB595921D685F700A3C59E /* graphics.cpp */,
 				F6FB595A21D685F700A3C59E /* graphics.h */,
 				F6FB595321D677D500A3C59E /* main.cpp */,
@@ -89,10 +95,16 @@
 				F6FB595D21D68C4500A3C59E /* Vector.h */,
 				F6FB595F21D68FD100A3C59E /* Player.cpp */,
 				F6FB596021D68FD100A3C59E /* Player.h */,
-				F6CB233E21D81DDD005789B5 /* Map.cpp */,
-				F6CB233F21D81DDD005789B5 /* Map.h */,
 			);
 			path = "Vector Race";
+			sourceTree = "<group>";
+		};
+		F6C991FD21E0CF8A00D2BBF7 /* resources */ = {
+			isa = PBXGroup;
+			children = (
+				F68A70B121E10A7D00100C0A /* Test_Circuit.png */,
+			);
+			name = resources;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -151,12 +163,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F6CB234021D81DDD005789B5 /* Map.cpp in Sources */,
 				F6FB595421D677D500A3C59E /* main.cpp in Sources */,
 				F6FB595221D6774C00A3C59E /* VectorRace.cpp in Sources */,
 				F6FB595E21D68C4500A3C59E /* Vector.cpp in Sources */,
 				F6FB595B21D685F700A3C59E /* graphics.cpp in Sources */,
 				F6FB596121D68FD100A3C59E /* Player.cpp in Sources */,
+				F68A70B021E0E62600100C0A /* Circuit.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

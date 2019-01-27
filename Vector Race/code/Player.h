@@ -50,7 +50,8 @@ public:
     
     //Hit Enter:
     void Enter();
-    
+
+    void OnCrash();
 private:
     Vector _vector; //the vector representation.
     Vector _lastVector; //last movement.

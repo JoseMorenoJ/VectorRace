@@ -26,6 +26,7 @@
 
 #include "Player.h"
 #include "Vector.h"
+#include "Globals.h"
 
 //Class Graphics: SDL tools to render, load images and draw them in the screen.
 class Graphics
@@ -36,13 +37,13 @@ public:
     
     //void blitSurface
     //  Draws a texture to a part of the screen, the destination rectangle.
-    void DrawSurface(SDL_Texture* texture
+    void DrawTexture(SDL_Texture* texture
                      , SDL_Rect* sourceRectangle
                      , SDL_Rect* destinationRectangle);
     
-    //void LoadMap
-    //Loads the map file in png format
-    void LoadMap(std::string&);
+    //SDL_Surface *LoadCircuit
+    //  Loads the circuit from an image and returns it as a Surface
+    SDL_Texture* LoadCircuitIMG(char filePath[]);
     
     //void SetColor
     //  Changes the color of the render
@@ -67,15 +68,26 @@ public:
     //  Return the _renderer.
     SDL_Renderer* GetRenderer() const;
     
+    //SDL_Rect
+    //  Returns a rectangle
+    SDL_Rect MakeSDLRect(int X, int Y, int W, int H);
+    
+    //SDL_Texture
+    //  Return the loaded Circuit as a texture
+    SDL_Texture* GetCircuitIMG() const;
+    
 private:
     SDL_Window* _window; //window object
     SDL_Renderer* _renderer; //drawing in the window
     SDL_Color _clearColor; //used to clear the render
     
-    SDL_Texture* _loadedMap; //
+    SDL_Texture* _circuitIMG; //
     
     //This was in Cave Story
     std::map<std::string, SDL_Surface*> _spriteSheets; //this will keep the loaded images so it doesn't reload them every time.
+    
+    //Helper methods:
+    void TakeScreenshot();
     
     
 };

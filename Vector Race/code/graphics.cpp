@@ -9,9 +9,6 @@
 
 #include "graphics.h"
 
-const int SCREEN_WIDTH = 640;
-const int SCREEN_HEIGHT = 480;
-
 SDL_Rect MakeSDLRect(int X, int Y, int W, int H);
 
 //Graphics class:
@@ -30,7 +27,9 @@ Graphics::Graphics()
     _clearColor.r = 0;
     _clearColor.g = 0;
     _clearColor.b = 0;
-    _clearColor.a = 255; //SDL_ALPHA_OPAQUE
+    _clearColor.a = SDL_ALPHA_OPAQUE;
+    
+    _circuitIMG = nullptr;
     
     Clear();
     
@@ -41,21 +40,21 @@ Graphics::~Graphics()
     SDL_DestroyWindow(this->_window);
 }
 
-void Graphics::DrawSurface(SDL_Texture* texture, SDL_Rect* sourceRectangle, SDL_Rect* destinationRectangle)
+void Graphics::DrawTexture(SDL_Texture* texture, SDL_Rect* sourceRectangle, SDL_Rect* destinationRectangle)
 {
     SDL_RenderCopy(this->_renderer, texture, sourceRectangle, destinationRectangle);
 }
 
-void Graphics::LoadMap(std::string &filePath)
+SDL_Texture* Graphics::LoadCircuitIMG(char filePath[])
 {
-    _loadedMap = SDL_CreateTextureFromSurface( _renderer, IMG_Load("resources/TestMap.png") );
+    _circuitIMG = SDL_CreateTextureFromSurface( _renderer, IMG_Load((filePath)) );
+    if(_circuitIMG == NULL)
+    {
+        std::cout << "Error loading Circuit: " << filePath << std::endl;
+        std::cout << "SDL_GetError(): " << SDL_GetError() << std::endl;
+    }
     
-    SDL_Rect destRect = MakeSDLRect(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
-    
-    SDL_SetRenderDrawColor(_renderer, 255, 255, 255, 255); //SDL_ALPHA_OPAQUE
-    SDL_RenderFillRect(_renderer, &destRect);
-    
-    return;
+    return _circuitIMG;
 }
 
 void Graphics::SetRenderColor(SDL_Color newColor)
@@ -65,16 +64,15 @@ void Graphics::SetRenderColor(SDL_Color newColor)
                            , newColor.g
                            , newColor.b
                            , newColor.a);
-    std::cout << newColor << std::endl;
 }
 
 void Graphics::DrawVector(Vector* vector)
 {
     SDL_RenderDrawLine(_renderer
-                       , vector->GetTail().x
-                       , vector->GetTail().y
-                       , vector->GetTail().x + vector->GetSpeed().x
-                       , vector->GetTail().y + vector->GetSpeed().y);
+                       , vector->GetOrigin().x
+                       , vector->GetOrigin().y
+                       , vector->GetOrigin().x + vector->GetSpeed().x
+                       , vector->GetOrigin().y + vector->GetSpeed().y);
     return;
 }
 
@@ -102,7 +100,7 @@ void Graphics::Clear()
 
 SDL_Renderer* Graphics::GetRenderer() const { return this->_renderer; }
 
-SDL_Rect MakeSDLRect(int X, int Y, int W, int H)
+SDL_Rect Graphics::MakeSDLRect(int X, int Y, int W, int H)
 {
     SDL_Rect rect;
     rect.x = X;
@@ -110,4 +108,17 @@ SDL_Rect MakeSDLRect(int X, int Y, int W, int H)
     rect.w = W;
     rect.h = H;
     return rect;
+}
+
+SDL_Texture* Graphics::GetCircuitIMG() const { return _circuitIMG; }
+
+void Graphics::TakeScreenshot()
+{
+    SDL_Surface *sshot = SDL_CreateRGBSurface(0, SCREEN_WIDTH, SCREEN_HEIGHT, 32, 0x00ff0000, 0x0000ff00, 0x000000ff, 0xff000000);
+    SDL_RenderReadPixels(_renderer, NULL, SDL_PIXELFORMAT_ARGB8888, sshot->pixels, sshot->pitch);
+    
+    SDL_SaveBMP(sshot, "screenshot.bmp");
+    SDL_FreeSurface(sshot);
+
+    return;
 }

@@ -12,7 +12,7 @@
 #include <memory>
 
 #include "VectorRace.h"
-#include "Map.h"
+#include "Circuit.h"
 
 VectorRace::VectorRace()
 {
@@ -41,11 +41,14 @@ void VectorRace::NewGame()
     
     //To control the time between frames. To limit the fps
     int LAST_UPDATE_TIME = SDL_GetTicks(); // it gets the ticks since the last get
-    const int FPS = 30;
+    const int FPS = 25;
     
     //Load the circuit and set the players
-    //  load the Map object and fill up the grid
-    PrepareRace(players[0], players[1]); //TODO
+    //  load the Circuit object and fill up the grid
+    //PrepareRace(players[0], players[1]); //TODO
+    char CircuitFilePath[] = "resources/Test_Circuit.png";
+    Circuit circuit(CircuitFilePath);
+    circuit.InitGrid(&graphics);
     
     //main game loop
     while ( !isGameOver() )
@@ -61,18 +64,26 @@ void VectorRace::NewGame()
                 
                 if (pressedKey == SDL_SCANCODE_RETURN) {
                     
+                    if ( ! circuit.IsInside( activePlayer->GetVector()->GetOrigin() ) )
+                    {
+                        activePlayer->OnCrash();
+                    }
+                    
                     activePlayer = GetNextPlayer(players);
                 }
             }
         }
         
-        //DrawScreen(&graphics, players);
+        //DrawScreen(&graphics, players); //************************
         
         //Render any other information (ex: HUB)
         
-        //Render the map
-        std::string CircuitFilePath = "resources/TestMap.png";
-        graphics.LoadMap(CircuitFilePath);
+        //Render the Circuit
+        SDL_Rect srcRect = graphics.MakeSDLRect(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
+        SDL_Rect destRect = graphics.MakeSDLRect(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
+        
+        //get circuit returns a SDL_texture*
+        graphics.DrawTexture(graphics.GetCircuitIMG(), &srcRect, &destRect);
         
         //Render the traces of the players
         for (int i=0; i<2; ++i) {
@@ -83,6 +94,7 @@ void VectorRace::NewGame()
                 temp = Coord;
             }
         }
+        //**********************************************************
         
         graphics.SetRenderColor( activePlayer->GetColor() );
         graphics.DrawVector( activePlayer->GetVector() );
@@ -95,24 +107,30 @@ void VectorRace::NewGame()
         //Control the fps
         const int CURRENT_TIME_MS = SDL_GetTicks();
         int ELAPSED_TIME_MS = CURRENT_TIME_MS - LAST_UPDATE_TIME;
+        
         if(ELAPSED_TIME_MS < 1000/FPS)
         {
             //wait until we have the fps that we want
+            SDL_Delay( (1000/FPS) - ELAPSED_TIME_MS );
+            
         }
-        //std::cout << "frame(ms)" << ELAPSED_TIME_MS << std::endl;
+        //else{ std::cout << "frame(ms)" << ELAPSED_TIME_MS << std::endl; }
+        LAST_UPDATE_TIME = CURRENT_TIME_MS;
     }
     
     //Present results?
     std::cout<<"out of game loop\n";
     
     //Cleanup
+    delete players[0];
+    delete players[1];
 }
 
 void VectorRace::PrepareRace(Player* p1, Player* p2)
 {
-    Map circuit;
+    Circuit circuit;
     
-    circuit.InitGrid();
+    //circuit.InitGrid();
     
     return;
 }
@@ -123,7 +141,7 @@ void DrawScreen(Graphics* graphics, Player* players[])
     return;
 }
 */
- 
+
 bool VectorRace::isGameOver()
 {
     return _bGameOver;
@@ -150,11 +168,9 @@ void VectorRace::processKey(SDL_Scancode pressedKey, Player *activePlayer)
             
         case SDL_SCANCODE_RETURN:
             activePlayer->Enter();
-            //TODO: NextPlayer();
             break;
             
         case SDL_SCANCODE_ESCAPE:
-            std::cout<<"ESCAPE\n";
             _bGameOver = true;
             break;
             
