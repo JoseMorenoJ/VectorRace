@@ -35,6 +35,7 @@
 		F68A70AF21E0E62600100C0A /* Circuit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Circuit.h; path = code/Circuit.h; sourceTree = "<group>"; };
 		F68A70B121E10A7D00100C0A /* Test_Circuit.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Test_Circuit.png; path = resources/Test_Circuit.png; sourceTree = "<group>"; };
 		F6C991FE21E0DC1400D2BBF7 /* Globals.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = Globals.h; path = code/Globals.h; sourceTree = "<group>"; };
+		F6E07E8C2212AA1600ABEEB6 /* Test_Circuit.pbm */ = {isa = PBXFileReference; lastKnownFileType = file; name = Test_Circuit.pbm; path = resources/Test_Circuit.pbm; sourceTree = "<group>"; };
 		F6FB595021D6774C00A3C59E /* VectorRace.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; lineEnding = 0; name = VectorRace.cpp; path = code/VectorRace.cpp; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.cpp; };
 		F6FB595121D6774C00A3C59E /* VectorRace.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VectorRace.h; path = code/VectorRace.h; sourceTree = "<group>"; };
 		F6FB595321D677D500A3C59E /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = main.cpp; path = code/main.cpp; sourceTree = "<group>"; };
@@ -102,6 +103,7 @@
 		F6C991FD21E0CF8A00D2BBF7 /* resources */ = {
 			isa = PBXGroup;
 			children = (
+				F6E07E8C2212AA1600ABEEB6 /* Test_Circuit.pbm */,
 				F68A70B121E10A7D00100C0A /* Test_Circuit.png */,
 			);
 			name = resources;

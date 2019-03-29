@@ -44,11 +44,9 @@ void VectorRace::NewGame()
     const int FPS = 25;
     
     //Load the circuit and set the players
-    //  load the Circuit object and fill up the grid
-    //PrepareRace(players[0], players[1]); //TODO
-    char CircuitFilePath[] = "resources/Test_Circuit.png";
+    char CircuitFilePath[] = "../resources/Test_Circuit.bmp";
     Circuit circuit(CircuitFilePath);
-    circuit.InitGrid(&graphics);
+    graphics.LoadCircuitIMG(CircuitFilePath);
     
     //main game loop
     while ( !isGameOver() )

@@ -9,8 +9,8 @@
 
 #include "Vector.h"
 
-Vector::Vector() { std::cout << "Vector()" << std::endl; }
-Vector::~Vector() { std::cout << "~Vector()" << std::endl; }
+Vector::Vector() { /*std::cout << "Vector()" << std::endl;*/ }
+Vector::~Vector() { /*std::cout << "~Vector()" << std::endl;*/ }
 
 //Setters
 void Vector::SetSpeed(Coordinate newSpeed) { _speed = newSpeed; }

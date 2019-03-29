@@ -36,8 +36,6 @@ public:
     Circuit();
     ~Circuit();
     
-    void InitGrid();
-    
     bool IsInside(Coordinate);
     
 private:
@@ -46,6 +44,7 @@ private:
     std::vector <GridElement> _CircuitGrid; //the circuit loaded from the png file
     
     std::vector<GridElement> readBMP(char* filename);
+    void InitGrid();
     
 };
 

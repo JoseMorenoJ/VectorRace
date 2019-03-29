@@ -14,7 +14,7 @@
 //Constructor
 Player::Player()
 {
-    std::cout << "Player()" << std::endl;
+    //std::cout << "Player()" << std::endl;
     
     _vector.SetOrigin( Coordinate(140,140) );
     _vector.SetSpeed( Coordinate(0,0) );
