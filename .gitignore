@@ -4,3 +4,10 @@
 Vector Race.xcodeproj/
 Vector Race.xcodeproj/project.pbxproj
 
+# Visual Studio files
+#####################
+Debug/
+*.sln
+**/*.vcxproj*
+.vs/
+VectorRace/Debug/
