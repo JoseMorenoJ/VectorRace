@@ -1,6 +1,5 @@
 # Xcode files
 #############
-
 vector Race.xcodeproj/
 vector Race.xcodeproj/project.pbxproj
 
@@ -11,3 +10,6 @@ Debug/
 **/*.vcxproj*
 .vs/
 vector_race/Debug/
+
+# CMake build
+build/*
