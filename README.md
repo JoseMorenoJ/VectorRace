@@ -1,4 +1,4 @@
-# VectorRace
+# vector_race
 A race of vectors.
 
 ## To do
@@ -8,9 +8,9 @@ Add a State Machine where each state will be either the menu, the game, the paus
 - Game: the race itself
 - Pause menu: menu opened from a game.
 
-States: 
+States:
 ```
-MainMenu  --NewGame--> Game  -----ESC----> PauseMenu
+MainMenu  --new_game--> Game  -----ESC----> PauseMenu
                        Game <--Continue--  PauseMenu
 MainMenu <------------------Exit---------- PauseMenu
 ```
